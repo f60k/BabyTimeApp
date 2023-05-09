@@ -23,7 +23,7 @@ struct LogData:Identifiable
 struct DurationData:Identifiable
 {
     var id = UUID()
-    var data:String
+    var data:Double
     var caption:String = "無題"
 }
 
@@ -104,14 +104,38 @@ class StopWatchManeger:ObservableObject{
         {
             let lastDate = lastLog.data
             let elapsedTime = calender.dateComponents([.second], from: lastDate, to: Date()).second!
-            let dLog = DurationData(data: elapsedTime.description)
+            let dLog = DurationData(data: Double(elapsedTime))
             durationLog.append(dLog)
         }
         
-        
-        
         log.append(LogData(data:Date(), phase:LogDataPhase.finish))
     }
+    
+    
+    
+    
+    func lap(){
+
+        let calender = Calendar(identifier: .gregorian)
+        let lastLog = log[log.count - 1]
+        if lastLog.phase == LogDataPhase.start
+        {
+            let lastDate = lastLog.data
+            let elapsedTime = calender.dateComponents([.second], from: lastDate, to: Date()).second!
+            let dLog = DurationData(data: Double(elapsedTime))
+            durationLog.append(dLog)
+        }
+        
+        log.append(LogData(data:Date(), phase:LogDataPhase.finish))
+        
+        log.append(LogData(data:Date(), phase:LogDataPhase.start))
+    }
+    
+    
+    
+    
+    
+    
     
     func pause(){
         if let _ = timer

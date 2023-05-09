@@ -27,6 +27,20 @@ struct ContentView: View {
         return caption
     }
     
+    func formatSec(sec:Double)->String
+    {
+        let dateFormatter = DateComponentsFormatter()
+        dateFormatter.unitsStyle = .abbreviated
+        dateFormatter.allowedUnits = [.hour, .minute, .second]
+//        dateFormatter.zeroFormattingBehavior = .pad
+        
+        var calender = Calendar.current
+        calender.locale = Locale(identifier: "ja_JP")
+        dateFormatter.calendar = calender
+        
+        return dateFormatter.string(from: sec)!
+    }
+    
     var body: some View {
         
         
@@ -34,8 +48,8 @@ struct ContentView: View {
         VStack {
             Spacer()
                 .padding(.top)
-            Text(String(format:"%.1f",self.stopWatchManeger.secondsElapsed))
-                .font(.custom("Futura", size: 60))
+            Text(formatSec(sec:self.stopWatchManeger.secondsElapsed))
+                .font(.custom("Futura", size: 54))
             
             
                 .onChange(of:scenePhase){phase in
@@ -60,8 +74,16 @@ struct ContentView: View {
             }
             
             if stopWatchManeger.mode == .start{
-                Button(action: {self.stopWatchManeger.stop()}){
-                    Text("終了").font(.title)
+                HStack {
+                    Spacer()
+                    Button(action: {self.stopWatchManeger.lap()}){
+                        Text("ラップ").font(.title)
+                    }
+                    Spacer()
+                    Button(action: {self.stopWatchManeger.stop()}){
+                        Text("終了").font(.title)
+                    }
+                    Spacer()
                 }
             }
             
@@ -96,7 +118,7 @@ struct ContentView: View {
                         HStack {
                             Text(log.caption)
                             Spacer()
-                            Text(log.data + "秒")
+                            Text(formatSec(sec:log.data))
                                 .multilineTextAlignment(.trailing)
                         }
                         
@@ -133,7 +155,7 @@ struct EditorView:View
         
         if let data = manager.durationDataByID(id: id)
         {
-            result = data.data
+            result = data.data.description
         }
         return result
     }
