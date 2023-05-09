@@ -11,7 +11,48 @@
 		23F33A432A0798B200DB350B /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23F33A422A0798B200DB350B /* ContentView.swift */; };
 		23F33A452A0798B300DB350B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 23F33A442A0798B300DB350B /* Assets.xcassets */; };
 		23F33A482A0798B300DB350B /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 23F33A472A0798B300DB350B /* Preview Assets.xcassets */; };
+		23F33A552A079A1E00DB350B /* BabyTimeWatchApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23F33A542A079A1E00DB350B /* BabyTimeWatchApp.swift */; };
+		23F33A572A079A1E00DB350B /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23F33A562A079A1E00DB350B /* ContentView.swift */; };
+		23F33A592A079A1F00DB350B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 23F33A582A079A1F00DB350B /* Assets.xcassets */; };
+		23F33A5C2A079A1F00DB350B /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 23F33A5B2A079A1F00DB350B /* Preview Assets.xcassets */; };
+		23F33A5F2A079A1F00DB350B /* BabyTimeWatch Watch App.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = 23F33A522A079A1E00DB350B /* BabyTimeWatch Watch App.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		23F33A772A079F0400DB350B /* StopWatchManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23F33A762A079F0400DB350B /* StopWatchManager.swift */; };
+		23F33A782A079F0400DB350B /* StopWatchManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23F33A762A079F0400DB350B /* StopWatchManager.swift */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		23F33A5D2A079A1F00DB350B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 23F33A352A0798B200DB350B /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 23F33A512A079A1E00DB350B;
+			remoteInfo = "BabyTimeWatch Watch App";
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		23F33A632A079A1F00DB350B /* Embed Watch Content */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "$(CONTENTS_FOLDER_PATH)/Watch";
+			dstSubfolderSpec = 16;
+			files = (
+				23F33A5F2A079A1F00DB350B /* BabyTimeWatch Watch App.app in Embed Watch Content */,
+			);
+			name = "Embed Watch Content";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		23F33A752A079D2400DB350B /* Embed ExtensionKit Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "$(EXTENSIONS_FOLDER_PATH)";
+			dstSubfolderSpec = 16;
+			files = (
+			);
+			name = "Embed ExtensionKit Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		23F33A3D2A0798B200DB350B /* BabyTime.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BabyTime.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -19,10 +60,23 @@
 		23F33A422A0798B200DB350B /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		23F33A442A0798B300DB350B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		23F33A472A0798B300DB350B /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		23F33A522A079A1E00DB350B /* BabyTimeWatch Watch App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "BabyTimeWatch Watch App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		23F33A542A079A1E00DB350B /* BabyTimeWatchApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BabyTimeWatchApp.swift; sourceTree = "<group>"; };
+		23F33A562A079A1E00DB350B /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		23F33A582A079A1F00DB350B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		23F33A5B2A079A1F00DB350B /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		23F33A762A079F0400DB350B /* StopWatchManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StopWatchManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
 		23F33A3A2A0798B200DB350B /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		23F33A4F2A079A1E00DB350B /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -36,6 +90,7 @@
 			isa = PBXGroup;
 			children = (
 				23F33A3F2A0798B200DB350B /* BabyTime */,
+				23F33A532A079A1E00DB350B /* BabyTimeWatch Watch App */,
 				23F33A3E2A0798B200DB350B /* Products */,
 			);
 			sourceTree = "<group>";
@@ -44,6 +99,7 @@
 			isa = PBXGroup;
 			children = (
 				23F33A3D2A0798B200DB350B /* BabyTime.app */,
+				23F33A522A079A1E00DB350B /* BabyTimeWatch Watch App.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -53,6 +109,7 @@
 			children = (
 				23F33A402A0798B200DB350B /* BabyTimeApp.swift */,
 				23F33A422A0798B200DB350B /* ContentView.swift */,
+				23F33A762A079F0400DB350B /* StopWatchManager.swift */,
 				23F33A442A0798B300DB350B /* Assets.xcassets */,
 				23F33A462A0798B300DB350B /* Preview Content */,
 			);
@@ -67,6 +124,25 @@
 			path = "Preview Content";
 			sourceTree = "<group>";
 		};
+		23F33A532A079A1E00DB350B /* BabyTimeWatch Watch App */ = {
+			isa = PBXGroup;
+			children = (
+				23F33A542A079A1E00DB350B /* BabyTimeWatchApp.swift */,
+				23F33A562A079A1E00DB350B /* ContentView.swift */,
+				23F33A582A079A1F00DB350B /* Assets.xcassets */,
+				23F33A5A2A079A1F00DB350B /* Preview Content */,
+			);
+			path = "BabyTimeWatch Watch App";
+			sourceTree = "<group>";
+		};
+		23F33A5A2A079A1F00DB350B /* Preview Content */ = {
+			isa = PBXGroup;
+			children = (
+				23F33A5B2A079A1F00DB350B /* Preview Assets.xcassets */,
+			);
+			path = "Preview Content";
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -77,14 +153,34 @@
 				23F33A392A0798B200DB350B /* Sources */,
 				23F33A3A2A0798B200DB350B /* Frameworks */,
 				23F33A3B2A0798B200DB350B /* Resources */,
+				23F33A632A079A1F00DB350B /* Embed Watch Content */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				23F33A5E2A079A1F00DB350B /* PBXTargetDependency */,
+			);
+			name = BabyTime;
+			productName = BabyTime;
+			productReference = 23F33A3D2A0798B200DB350B /* BabyTime.app */;
+			productType = "com.apple.product-type.application";
+		};
+		23F33A512A079A1E00DB350B /* BabyTimeWatch Watch App */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 23F33A602A079A1F00DB350B /* Build configuration list for PBXNativeTarget "BabyTimeWatch Watch App" */;
+			buildPhases = (
+				23F33A4E2A079A1E00DB350B /* Sources */,
+				23F33A4F2A079A1E00DB350B /* Frameworks */,
+				23F33A502A079A1E00DB350B /* Resources */,
+				23F33A752A079D2400DB350B /* Embed ExtensionKit Extensions */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
-			name = BabyTime;
-			productName = BabyTime;
-			productReference = 23F33A3D2A0798B200DB350B /* BabyTime.app */;
+			name = "BabyTimeWatch Watch App";
+			productName = "BabyTimeWatch Watch App";
+			productReference = 23F33A522A079A1E00DB350B /* BabyTimeWatch Watch App.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -98,6 +194,9 @@
 				LastUpgradeCheck = 1430;
 				TargetAttributes = {
 					23F33A3C2A0798B200DB350B = {
+						CreatedOnToolsVersion = 14.3;
+					};
+					23F33A512A079A1E00DB350B = {
 						CreatedOnToolsVersion = 14.3;
 					};
 				};
@@ -116,6 +215,7 @@
 			projectRoot = "";
 			targets = (
 				23F33A3C2A0798B200DB350B /* BabyTime */,
+				23F33A512A079A1E00DB350B /* BabyTimeWatch Watch App */,
 			);
 		};
 /* End PBXProject section */
@@ -130,6 +230,15 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		23F33A502A079A1E00DB350B /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				23F33A5C2A079A1F00DB350B /* Preview Assets.xcassets in Resources */,
+				23F33A592A079A1F00DB350B /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -138,11 +247,30 @@
 			buildActionMask = 2147483647;
 			files = (
 				23F33A432A0798B200DB350B /* ContentView.swift in Sources */,
+				23F33A772A079F0400DB350B /* StopWatchManager.swift in Sources */,
 				23F33A412A0798B200DB350B /* BabyTimeApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		23F33A4E2A079A1E00DB350B /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				23F33A572A079A1E00DB350B /* ContentView.swift in Sources */,
+				23F33A782A079F0400DB350B /* StopWatchManager.swift in Sources */,
+				23F33A552A079A1E00DB350B /* BabyTimeWatchApp.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		23F33A5E2A079A1F00DB350B /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 23F33A512A079A1E00DB350B /* BabyTimeWatch Watch App */;
+			targetProxy = 23F33A5D2A079A1F00DB350B /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		23F33A492A0798B300DB350B /* Debug */ = {
@@ -262,6 +390,7 @@
 		23F33A4C2A0798B300DB350B /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
@@ -291,6 +420,7 @@
 		23F33A4D2A0798B300DB350B /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
@@ -317,6 +447,68 @@
 			};
 			name = Release;
 		};
+		23F33A612A079A1F00DB350B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"BabyTimeWatch Watch App/Preview Content\"";
+				DEVELOPMENT_TEAM = 5C8VBPDT3E;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = BabyTimeWatch;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				INFOPLIST_KEY_WKCompanionAppBundleIdentifier = jp.hergo.BabyTime;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = jp.hergo.BabyTime.watchkitapp;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 9.4;
+			};
+			name = Debug;
+		};
+		23F33A622A079A1F00DB350B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"BabyTimeWatch Watch App/Preview Content\"";
+				DEVELOPMENT_TEAM = 5C8VBPDT3E;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = BabyTimeWatch;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				INFOPLIST_KEY_WKCompanionAppBundleIdentifier = jp.hergo.BabyTime;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = jp.hergo.BabyTime.watchkitapp;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 9.4;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -334,6 +526,15 @@
 			buildConfigurations = (
 				23F33A4C2A0798B300DB350B /* Debug */,
 				23F33A4D2A0798B300DB350B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		23F33A602A079A1F00DB350B /* Build configuration list for PBXNativeTarget "BabyTimeWatch Watch App" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				23F33A612A079A1F00DB350B /* Debug */,
+				23F33A622A079A1F00DB350B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
