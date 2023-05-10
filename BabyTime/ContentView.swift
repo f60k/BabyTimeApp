@@ -170,6 +170,8 @@ struct EditorView:View
     
     @ObservedObject var manager:StopWatchManeger
     
+    @FocusState var focus:Bool
+    
     
     func dataByID(id:UUID)->String
     {
@@ -193,10 +195,14 @@ struct EditorView:View
         TextField("", text: $text, prompt: Text("タイトル"))
             .textFieldStyle(.roundedBorder)
             .padding()
+            .focused(self.$focus)
             .onSubmit {
                 
                 isShown.toggle()
                 manager.editCaption(id: uuid, text: text)
+            }
+            .onAppear{
+                self.focus = true
             }
         
     }
