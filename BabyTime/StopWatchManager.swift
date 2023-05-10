@@ -79,6 +79,12 @@ class StopWatchManeger:ObservableObject{
         }
     }
     
+    func resetLog()
+    {
+        log = []
+        durationLog = []
+    }
+    
     func start(){
         mode = .start
         timer = Timer.scheduledTimer(withTimeInterval: 0.1, repeats: true){ timer in
