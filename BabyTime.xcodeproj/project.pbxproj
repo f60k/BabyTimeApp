@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		23C1D2E72A0B787F00B8F30D /* EditorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23C1D2E62A0B787F00B8F30D /* EditorView.swift */; };
 		23F33A412A0798B200DB350B /* BabyTimeApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23F33A402A0798B200DB350B /* BabyTimeApp.swift */; };
 		23F33A432A0798B200DB350B /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23F33A422A0798B200DB350B /* ContentView.swift */; };
 		23F33A452A0798B300DB350B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 23F33A442A0798B300DB350B /* Assets.xcassets */; };
@@ -55,6 +56,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		23C1D2E62A0B787F00B8F30D /* EditorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditorView.swift; sourceTree = "<group>"; };
 		23F33A3D2A0798B200DB350B /* BabyTime.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BabyTime.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		23F33A402A0798B200DB350B /* BabyTimeApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BabyTimeApp.swift; sourceTree = "<group>"; };
 		23F33A422A0798B200DB350B /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -109,6 +111,7 @@
 			children = (
 				23F33A402A0798B200DB350B /* BabyTimeApp.swift */,
 				23F33A422A0798B200DB350B /* ContentView.swift */,
+				23C1D2E62A0B787F00B8F30D /* EditorView.swift */,
 				23F33A762A079F0400DB350B /* StopWatchManager.swift */,
 				23F33A442A0798B300DB350B /* Assets.xcassets */,
 				23F33A462A0798B300DB350B /* Preview Content */,
@@ -247,6 +250,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				23F33A432A0798B200DB350B /* ContentView.swift in Sources */,
+				23C1D2E72A0B787F00B8F30D /* EditorView.swift in Sources */,
 				23F33A772A079F0400DB350B /* StopWatchManager.swift in Sources */,
 				23F33A412A0798B200DB350B /* BabyTimeApp.swift in Sources */,
 			);
