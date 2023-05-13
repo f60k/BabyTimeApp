@@ -13,6 +13,13 @@ enum LogDataPhase
     case finish
 }
 
+enum SleepCategory:Int
+{
+    case hirune = 1
+    case yorune = 2
+    case sonota = 3
+}
+
 struct LogData:Identifiable
 {
     var id = UUID()
@@ -24,7 +31,8 @@ struct DurationData:Identifiable
 {
     var id = UUID()
     var data:Double
-    var caption:String = "無題"
+    var caption:String = ""
+    var category:SleepCategory = .hirune
 }
 
 class StopWatchManeger:ObservableObject{
@@ -69,13 +77,35 @@ class StopWatchManeger:ObservableObject{
 //                data.caption = text
 //                durationLog[0].caption = text
                 targetIndex = index
-                print(index)
+//                print(index)
             }
         }
         
         if let i = targetIndex
         {
             durationLog[i].caption = text
+        }
+    }
+    
+    func editSleepCategory(id:UUID, cat:SleepCategory)
+    {
+        var targetIndex:Int?
+        
+        for (index, data) in durationLog.enumerated()
+        {
+            if data.id == id
+            {
+//                data.caption = text
+//                durationLog[0].caption = text
+                targetIndex = index
+//                print(index)
+            }
+        }
+        
+        if let i = targetIndex
+        {
+            durationLog[i].category = cat
+            print(durationLog[i])
         }
     }
     

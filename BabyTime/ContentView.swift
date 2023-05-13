@@ -28,6 +28,16 @@ struct ContentView: View {
         return caption
     }
     
+    func getCategoryByID(id:UUID)->SleepCategory
+    {
+        var cat = BabyTime.SleepCategory.hirune
+        if let data = stopWatchManeger.durationDataByID(id: uuid)
+        {
+            cat = data.category
+        }
+        return cat
+    }
+    
     func formatSec(sec:Double)->String
     {
         let dateFormatter = DateComponentsFormatter()
@@ -40,6 +50,24 @@ struct ContentView: View {
         dateFormatter.calendar = calender
         
         return dateFormatter.string(from: sec)!
+    }
+    
+    func formatLogCategory(cat:SleepCategory)->String
+    {
+        let str:String
+        if cat == BabyTime.SleepCategory.hirune
+        {
+            str = "昼寝"
+        }
+        else if cat == BabyTime.SleepCategory.yorune
+        {
+            str = "夜寝"
+        }
+        else
+        {
+            str = "睡眠以外"
+        }
+        return str
     }
     
     var body: some View {
@@ -118,6 +146,8 @@ struct ContentView: View {
                         }){
                             HStack {
                                 Text(log.caption)
+                                
+                                Text("" + formatLogCategory(cat:log.category) + "")
                                 Spacer()
                                 Text(formatSec(sec:log.data))
                                     .multilineTextAlignment(.trailing)
@@ -155,7 +185,7 @@ struct ContentView: View {
         .sheet(isPresented: $isSheetShown)
         {
             
-            EditorView(text:getCaptionByID(id: uuid), isShown: $isSheetShown,uuid:$uuid, manager:stopWatchManeger)
+            EditorView(text:getCaptionByID(id: uuid), category:getCategoryByID(id: uuid).rawValue, isShown: $isSheetShown,uuid:$uuid, manager:stopWatchManeger)
         }.edgesIgnoringSafeArea(.all)
     }
 }
