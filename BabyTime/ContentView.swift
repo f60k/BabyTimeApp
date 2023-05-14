@@ -6,6 +6,8 @@
 //
 
 import SwiftUI
+import HealthKit
+import HealthKitUI
 
 struct ContentView: View {
     @ObservedObject var stopWatchManeger = StopWatchManeger()
@@ -24,7 +26,7 @@ struct ContentView: View {
         {
             caption = data.caption
         }
-//        print(caption)
+        //        print(caption)
         return caption
     }
     
@@ -68,6 +70,65 @@ struct ContentView: View {
             str = "睡眠以外"
         }
         return str
+    }
+    
+    func openHealth()
+    {
+        if HKHealthStore.isHealthDataAvailable()
+        {
+            let myHealthStore = HKHealthStore()
+            let typeOfWrite = Set(arrayLiteral: HKObjectType.categoryType(forIdentifier: .sleepAnalysis)!
+            )
+            myHealthStore.requestAuthorization(toShare: typeOfWrite, read: nil, completion: {
+                (success, error) in
+                if let e = error
+                {
+                    print("Error:\(e.localizedDescription)")
+                    return
+                }
+                print(success ? "Success" : "Failure")
+                
+                
+//                ForEach(stopWatchManeger.durationLog.reversed()){log in
+//
+//                    let sleepSampleType = HKCategoryType(.sleepAnalysis)
+//                    let sleepCategory = HKCategoryValueSleepAnalysis.asleepDeep.rawValue
+//                    let deepSleepSample  = HKCategorySample(type: sleepSampleType,
+//                                                            value:sleepCategory,
+//                                                            start: log.start,
+//                                                            end: log.end)
+//                    myHealthStore.save(deepSleepSample){
+//                        success, error in
+//                        if success
+//                        {
+//
+//                        }else{
+//
+//                        }
+//                    }
+//                }
+                
+                
+                
+                let log = stopWatchManeger.durationLog[0]
+                
+                let sleepSampleType = HKCategoryType(.sleepAnalysis)
+                let sleepCategory = HKCategoryValueSleepAnalysis.asleepDeep.rawValue
+                let deepSleepSample  = HKCategorySample(type: sleepSampleType,
+                                                        value:sleepCategory,
+                                                        start: log.start,
+                                                        end: log.end)
+                myHealthStore.save(deepSleepSample){
+                    success, error in
+                    if success
+                    {
+                        print("save;success")
+                    }else{
+                        print("save;failed")
+                    }
+                }
+            })
+        }
     }
     
     var body: some View {
@@ -163,6 +224,14 @@ struct ContentView: View {
                         isAlertShown=true
                     }) {
                         Image(systemName: "trash").disabled(stopWatchManeger.mode != .stop)
+                    }
+                }
+                
+                ToolbarItem(placement: .navigationBarTrailing){
+                    Button(action: {
+                        openHealth()
+                    }) {
+                        Text("health")
                     }
                 }
             }

@@ -31,6 +31,8 @@ struct DurationData:Identifiable
 {
     var id = UUID()
     var data:Double
+    var start:Date
+    var end:Date
     var caption:String = ""
     var category:SleepCategory = .hirune
 }
@@ -140,7 +142,7 @@ class StopWatchManeger:ObservableObject{
         {
             let lastDate = lastLog.data
             let elapsedTime = calender.dateComponents([.second], from: lastDate, to: Date()).second!
-            let dLog = DurationData(data: Double(elapsedTime))
+            let dLog = DurationData(data: Double(elapsedTime), start: lastDate, end:Date())
             durationLog.append(dLog)
         }
         
@@ -158,7 +160,7 @@ class StopWatchManeger:ObservableObject{
         {
             let lastDate = lastLog.data
             let elapsedTime = calender.dateComponents([.second], from: lastDate, to: Date()).second!
-            let dLog = DurationData(data: Double(elapsedTime))
+            let dLog = DurationData(data: Double(elapsedTime), start: lastDate, end:Date())
             durationLog.append(dLog)
         }
         
