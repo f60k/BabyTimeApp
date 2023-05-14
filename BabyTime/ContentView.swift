@@ -67,7 +67,7 @@ struct ContentView: View {
         }
         else
         {
-            str = "睡眠以外"
+            str = "覚醒"
         }
         return str
     }
@@ -88,8 +88,9 @@ struct ContentView: View {
                 }
                 print(success ? "Success" : "Failure")
                 
-                
-//                ForEach(stopWatchManeger.durationLog.reversed()){log in
+                stopWatchManeger.save()
+                    
+//                ForEach(stopWatchManeger.durationLog){log in
 //
 //                    let sleepSampleType = HKCategoryType(.sleepAnalysis)
 //                    let sleepCategory = HKCategoryValueSleepAnalysis.asleepDeep.rawValue
@@ -110,23 +111,23 @@ struct ContentView: View {
                 
                 
                 
-                let log = stopWatchManeger.durationLog[0]
-                
-                let sleepSampleType = HKCategoryType(.sleepAnalysis)
-                let sleepCategory = HKCategoryValueSleepAnalysis.asleepDeep.rawValue
-                let deepSleepSample  = HKCategorySample(type: sleepSampleType,
-                                                        value:sleepCategory,
-                                                        start: log.start,
-                                                        end: log.end)
-                myHealthStore.save(deepSleepSample){
-                    success, error in
-                    if success
-                    {
-                        print("save;success")
-                    }else{
-                        print("save;failed")
-                    }
-                }
+//                let log = stopWatchManeger.durationLog[0]
+//
+//                let sleepSampleType = HKCategoryType(.sleepAnalysis)
+//                let sleepCategory = HKCategoryValueSleepAnalysis.asleepDeep.rawValue
+//                let deepSleepSample  = HKCategorySample(type: sleepSampleType,
+//                                                        value:sleepCategory,
+//                                                        start: log.start,
+//                                                        end: log.end)
+//                myHealthStore.save(samples){
+//                    success, error in
+//                    if success
+//                    {
+//                        print("save;success")
+//                    }else{
+//                        print("save;failed")
+//                    }
+//                }
             })
         }
     }

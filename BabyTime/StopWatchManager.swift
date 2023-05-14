@@ -6,6 +6,8 @@
 //
 
 import UIKit
+import HealthKit
+
 
 enum LogDataPhase
 {
@@ -76,10 +78,10 @@ class StopWatchManeger:ObservableObject{
         {
             if data.id == id
             {
-//                data.caption = text
-//                durationLog[0].caption = text
+                //                data.caption = text
+                //                durationLog[0].caption = text
                 targetIndex = index
-//                print(index)
+                //                print(index)
             }
         }
         
@@ -97,10 +99,10 @@ class StopWatchManeger:ObservableObject{
         {
             if data.id == id
             {
-//                data.caption = text
-//                durationLog[0].caption = text
+                //                data.caption = text
+                //                durationLog[0].caption = text
                 targetIndex = index
-//                print(index)
+                //                print(index)
             }
         }
         
@@ -153,7 +155,7 @@ class StopWatchManeger:ObservableObject{
     
     
     func lap(){
-
+        
         let calender = Calendar(identifier: .gregorian)
         let lastLog = log[log.count - 1]
         if lastLog.phase == LogDataPhase.start
@@ -171,7 +173,30 @@ class StopWatchManeger:ObservableObject{
     
     
     
-    
+    func save()
+    {
+        let myHealthStore = HKHealthStore()
+        
+        self.durationLog.forEach{log in
+
+            let sleepSampleType = HKCategoryType(.sleepAnalysis)
+            let sleepCategory = log.category == SleepCategory.sonota ? HKCategoryValueSleepAnalysis.awake.rawValue : HKCategoryValueSleepAnalysis.asleepDeep.rawValue
+//            print(sleepCategory.description)
+            let deepSleepSample  = HKCategorySample(type: sleepSampleType,
+                                                    value:sleepCategory,
+                                                    start: log.start,
+                                                    end: log.end)
+            myHealthStore.save(deepSleepSample){
+                success, error in
+                if success
+                {
+                    print("Save:Success")
+                }else{
+                    print("Save:Failure")
+                }
+            }
+        }
+    }
     
     
     
