@@ -89,45 +89,7 @@ struct ContentView: View {
                 print(success ? "Success" : "Failure")
                 
                 stopWatchManeger.save()
-                    
-//                ForEach(stopWatchManeger.durationLog){log in
-//
-//                    let sleepSampleType = HKCategoryType(.sleepAnalysis)
-//                    let sleepCategory = HKCategoryValueSleepAnalysis.asleepDeep.rawValue
-//                    let deepSleepSample  = HKCategorySample(type: sleepSampleType,
-//                                                            value:sleepCategory,
-//                                                            start: log.start,
-//                                                            end: log.end)
-//                    myHealthStore.save(deepSleepSample){
-//                        success, error in
-//                        if success
-//                        {
-//
-//                        }else{
-//
-//                        }
-//                    }
-//                }
-                
-                
-                
-//                let log = stopWatchManeger.durationLog[0]
-//
-//                let sleepSampleType = HKCategoryType(.sleepAnalysis)
-//                let sleepCategory = HKCategoryValueSleepAnalysis.asleepDeep.rawValue
-//                let deepSleepSample  = HKCategorySample(type: sleepSampleType,
-//                                                        value:sleepCategory,
-//                                                        start: log.start,
-//                                                        end: log.end)
-//                myHealthStore.save(samples){
-//                    success, error in
-//                    if success
-//                    {
-//                        print("save;success")
-//                    }else{
-//                        print("save;failed")
-//                    }
-//                }
+
             })
         }
     }
@@ -177,34 +139,15 @@ struct ContentView: View {
                         Spacer()
                     }
                 }
-                
-                //            if stopWatchManeger.mode == .pause{
-                //                VStack{
-                //                    Button(action: {self.stopWatchManeger.start()}){
-                //                        Text("再開").font(.title)
-                //                    }
-                //
-                //                    Button(action: {self.stopWatchManeger.stop()}){
-                //                        Text("終了").font(.title)
-                //                    }
-                //                }
-                //            }
-                
+
                 List
                 {
                     ForEach(stopWatchManeger.durationLog.reversed()){log in
-                        
-                        
-                        
-                        
+
                         Button(action: {
                             isSheetShown.toggle()
                             uuid = log.id
-                            //                        print(log.id)
-                            //                        stopWatchManeger.editCaption(id: log.id, text: "aaaa")
-                            //                        stopWatchManeger.durationLog[0].caption = "aaaa"
-                            
-                            
+
                         }){
                             HStack {
                                 Text(log.caption)

@@ -128,6 +128,19 @@ class StopWatchManeger:ObservableObject{
         log.append(LogData(data:Date(), phase:LogDataPhase.start))
     }
     
+    private func appendDurationLog()
+    {
+        let calender = Calendar(identifier: .gregorian)
+        let lastLog = log[log.count - 1]
+        if lastLog.phase == LogDataPhase.start
+        {
+            let lastDate = lastLog.data
+            let elapsedTime = calender.dateComponents([.second], from: lastDate, to: Date()).second!
+            let dLog = DurationData(data: Double(elapsedTime), start: lastDate, end:Date())
+            durationLog.append(dLog)
+        }
+    }
+    
     func stop(){
         if let _ = timer
         {
@@ -137,16 +150,7 @@ class StopWatchManeger:ObservableObject{
         secondsElapsed = 0
         mode = .stop
         
-        
-        let calender = Calendar(identifier: .gregorian)
-        let lastLog = log[log.count - 1]
-        if lastLog.phase == LogDataPhase.start
-        {
-            let lastDate = lastLog.data
-            let elapsedTime = calender.dateComponents([.second], from: lastDate, to: Date()).second!
-            let dLog = DurationData(data: Double(elapsedTime), start: lastDate, end:Date())
-            durationLog.append(dLog)
-        }
+        appendDurationLog()
         
         log.append(LogData(data:Date(), phase:LogDataPhase.finish))
     }
@@ -156,15 +160,7 @@ class StopWatchManeger:ObservableObject{
     
     func lap(){
         
-        let calender = Calendar(identifier: .gregorian)
-        let lastLog = log[log.count - 1]
-        if lastLog.phase == LogDataPhase.start
-        {
-            let lastDate = lastLog.data
-            let elapsedTime = calender.dateComponents([.second], from: lastDate, to: Date()).second!
-            let dLog = DurationData(data: Double(elapsedTime), start: lastDate, end:Date())
-            durationLog.append(dLog)
-        }
+        appendDurationLog()
         
         log.append(LogData(data:Date(), phase:LogDataPhase.finish))
         
