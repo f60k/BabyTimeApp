@@ -72,7 +72,7 @@ struct ContentView: View {
         return str
     }
     
-    func openHealth()
+    func uploadHealth()
     {
         if HKHealthStore.isHealthDataAvailable()
         {
@@ -88,7 +88,29 @@ struct ContentView: View {
                 }
                 print(success ? "Success" : "Failure")
                 
-                stopWatchManeger.save()
+                stopWatchManeger.upload()
+
+            })
+        }
+    }
+    
+    func downloadHealth()
+    {
+        if HKHealthStore.isHealthDataAvailable()
+        {
+            let myHealthStore = HKHealthStore()
+            let typeOfRead = Set(arrayLiteral: HKObjectType.categoryType(forIdentifier: .sleepAnalysis)!
+            )
+            myHealthStore.requestAuthorization(toShare: nil, read: typeOfRead, completion: {
+                (success, error) in
+                if let e = error
+                {
+                    print("Error:\(e.localizedDescription)")
+                    return
+                }
+                print(success ? "Success" : "Failure")
+                
+                stopWatchManeger.download()
 
             })
         }
@@ -171,11 +193,19 @@ struct ContentView: View {
                     }
                 }
                 
-                ToolbarItem(placement: .navigationBarTrailing){
+                ToolbarItem(placement: .navigationBarLeading){
                     Button(action: {
-                        openHealth()
+                        uploadHealth()
                     }) {
-                        Text("health")
+                        Image(systemName: "arrow.up.heart")
+                    }
+                }
+                
+                ToolbarItem(placement: .navigationBarLeading){
+                    Button(action: {
+                        downloadHealth()
+                    }) {
+                        Image(systemName: "arrow.down.heart")
                     }
                 }
             }

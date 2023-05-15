@@ -141,6 +141,14 @@ class StopWatchManeger:ObservableObject{
         }
     }
     
+    private func appendDurationLog(start:Date, end:Date)
+    {
+        let calender = Calendar(identifier: .gregorian)
+        let elapsedTime = calender.dateComponents([.second], from: start, to: end).second!
+        let dLog = DurationData(data: Double(elapsedTime), start: start, end:end)
+        durationLog.append(dLog)
+    }
+    
     func stop(){
         if let _ = timer
         {
@@ -169,7 +177,7 @@ class StopWatchManeger:ObservableObject{
     
     
     
-    func save()
+    func upload()
     {
         let myHealthStore = HKHealthStore()
         
@@ -194,7 +202,32 @@ class StopWatchManeger:ObservableObject{
         }
     }
     
-    
+    func download()
+    {
+        let myHealthStore = HKHealthStore()
+        let sleepSampleType = HKObjectType.categoryType(forIdentifier: HKCategoryTypeIdentifier.sleepAnalysis)!
+        
+        let endDate = NSSortDescriptor(key: HKSampleSortIdentifierEndDate,
+                                       ascending: false)
+        let q = HKSampleQuery(sampleType: sleepSampleType,
+                              predicate: nil,
+                              limit: 0,
+                              sortDescriptors: [endDate]) {
+            (query, results, error) in
+            
+            if let samples = results
+            {
+                samples.forEach{ sample in
+                    let start = sample.startDate
+                    let end = sample.endDate
+                    DispatchQueue.main.async {
+                        self.appendDurationLog(start: start, end: end)
+                    }
+                }
+            }
+        }
+        myHealthStore.execute(q)
+    }
     
     func pause(){
         if let _ = timer
