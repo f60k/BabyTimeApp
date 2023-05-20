@@ -6,6 +6,8 @@
 //
 
 import SwiftUI
+import HealthKit
+import HealthKitUI
 
 struct ContentView: View {
     @ObservedObject var stopWatchManeger = StopWatchManeger()
@@ -24,7 +26,7 @@ struct ContentView: View {
         {
             caption = data.caption
         }
-//        print(caption)
+        //        print(caption)
         return caption
     }
     
@@ -65,9 +67,53 @@ struct ContentView: View {
         }
         else
         {
-            str = "睡眠以外"
+            str = "覚醒"
         }
         return str
+    }
+    
+    func uploadHealth()
+    {
+        if HKHealthStore.isHealthDataAvailable()
+        {
+            let myHealthStore = HKHealthStore()
+            let typeOfWrite = Set(arrayLiteral: HKObjectType.categoryType(forIdentifier: .sleepAnalysis)!
+            )
+            myHealthStore.requestAuthorization(toShare: typeOfWrite, read: nil, completion: {
+                (success, error) in
+                if let e = error
+                {
+                    print("Error:\(e.localizedDescription)")
+                    return
+                }
+                print(success ? "Success" : "Failure")
+                
+                stopWatchManeger.upload()
+
+            })
+        }
+    }
+    
+    func downloadHealth()
+    {
+        if HKHealthStore.isHealthDataAvailable()
+        {
+            let myHealthStore = HKHealthStore()
+            let typeOfRead = Set(arrayLiteral: HKObjectType.categoryType(forIdentifier: .sleepAnalysis)!
+            )
+            myHealthStore.requestAuthorization(toShare: nil, read: typeOfRead, completion: {
+                (success, error) in
+                if let e = error
+                {
+                    print("Error:\(e.localizedDescription)")
+                    return
+                }
+                print(success ? "Success" : "Failure")
+                
+                stopWatchManeger.download()
+
+            })
+        }
     }
     
     var body: some View {
@@ -115,34 +161,15 @@ struct ContentView: View {
                         Spacer()
                     }
                 }
-                
-                //            if stopWatchManeger.mode == .pause{
-                //                VStack{
-                //                    Button(action: {self.stopWatchManeger.start()}){
-                //                        Text("再開").font(.title)
-                //                    }
-                //
-                //                    Button(action: {self.stopWatchManeger.stop()}){
-                //                        Text("終了").font(.title)
-                //                    }
-                //                }
-                //            }
-                
+
                 List
                 {
                     ForEach(stopWatchManeger.durationLog.reversed()){log in
-                        
-                        
-                        
-                        
+
                         Button(action: {
                             isSheetShown.toggle()
                             uuid = log.id
-                            //                        print(log.id)
-                            //                        stopWatchManeger.editCaption(id: log.id, text: "aaaa")
-                            //                        stopWatchManeger.durationLog[0].caption = "aaaa"
-                            
-                            
+
                         }){
                             HStack {
                                 Text(log.caption)
@@ -163,6 +190,22 @@ struct ContentView: View {
                         isAlertShown=true
                     }) {
                         Image(systemName: "trash").disabled(stopWatchManeger.mode != .stop)
+                    }
+                }
+                
+                ToolbarItem(placement: .navigationBarLeading){
+                    Button(action: {
+                        uploadHealth()
+                    }) {
+                        Image(systemName: "arrow.up.heart")
+                    }
+                }
+                
+                ToolbarItem(placement: .navigationBarLeading){
+                    Button(action: {
+                        downloadHealth()
+                    }) {
+                        Image(systemName: "arrow.down.heart")
                     }
                 }
             }

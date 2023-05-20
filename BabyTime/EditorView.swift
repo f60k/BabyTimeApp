@@ -43,7 +43,7 @@ struct EditorView:View
         Picker("カテゴリを選択", selection: $category) {
             Text("昼寝").tag(1)
             Text("夜寝").tag(2)
-            Text("睡眠以外").tag(3)
+            Text("覚醒").tag(3)
         } .pickerStyle(InlinePickerStyle())
         
         TextField("", text: $text, prompt: Text("タイトル"))

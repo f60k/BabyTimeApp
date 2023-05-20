@@ -6,6 +6,8 @@
 //
 
 import UIKit
+import HealthKit
+
 
 enum LogDataPhase
 {
@@ -31,8 +33,88 @@ struct DurationData:Identifiable
 {
     var id = UUID()
     var data:Double
+    var start:Date
+    var end:Date
     var caption:String = ""
     var category:SleepCategory = .hirune
+}
+
+
+
+class Time: Comparable, Equatable {
+init(_ date: Date) {
+    //get the current calender
+    let calendar = Calendar.current
+
+    //get just the minute and the hour of the day passed to it
+    let dateComponents = calendar.dateComponents([.hour, .minute], from: date)
+
+        //calculate the seconds since the beggining of the day for comparisions
+        let dateSeconds = dateComponents.hour! * 3600 + dateComponents.minute! * 60
+
+        //set the varibles
+        secondsSinceBeginningOfDay = dateSeconds
+        hour = dateComponents.hour!
+        minute = dateComponents.minute!
+    }
+
+    init(_ hour: Int, _ minute: Int) {
+        //calculate the seconds since the beggining of the day for comparisions
+        let dateSeconds = hour * 3600 + minute * 60
+
+        //set the varibles
+        secondsSinceBeginningOfDay = dateSeconds
+        self.hour = hour
+        self.minute = minute
+    }
+
+    var hour : Int
+    var minute: Int
+
+    var date: Date {
+        //get the current calender
+        let calendar = Calendar.current
+
+        //create a new date components.
+        var dateComponents = DateComponents()
+
+        dateComponents.hour = hour
+        dateComponents.minute = minute
+
+        return calendar.date(byAdding: dateComponents, to: Date())!
+    }
+
+    /// the number or seconds since the beggining of the day, this is used for comparisions
+    private let secondsSinceBeginningOfDay: Int
+
+    //comparisions so you can compare times
+    static func == (lhs: Time, rhs: Time) -> Bool {
+        return lhs.secondsSinceBeginningOfDay == rhs.secondsSinceBeginningOfDay
+    }
+
+    static func < (lhs: Time, rhs: Time) -> Bool {
+        return lhs.secondsSinceBeginningOfDay < rhs.secondsSinceBeginningOfDay
+    }
+
+    static func <= (lhs: Time, rhs: Time) -> Bool {
+        return lhs.secondsSinceBeginningOfDay <= rhs.secondsSinceBeginningOfDay
+    }
+
+
+    static func >= (lhs: Time, rhs: Time) -> Bool {
+        return lhs.secondsSinceBeginningOfDay >= rhs.secondsSinceBeginningOfDay
+    }
+
+
+    static func > (lhs: Time, rhs: Time) -> Bool {
+        return lhs.secondsSinceBeginningOfDay > rhs.secondsSinceBeginningOfDay
+    }
+}
+
+extension Date {
+    var time: Time {
+        return Time(self)
+    }
 }
 
 class StopWatchManeger:ObservableObject{
@@ -74,10 +156,10 @@ class StopWatchManeger:ObservableObject{
         {
             if data.id == id
             {
-//                data.caption = text
-//                durationLog[0].caption = text
+                //                data.caption = text
+                //                durationLog[0].caption = text
                 targetIndex = index
-//                print(index)
+                //                print(index)
             }
         }
         
@@ -95,10 +177,10 @@ class StopWatchManeger:ObservableObject{
         {
             if data.id == id
             {
-//                data.caption = text
-//                durationLog[0].caption = text
+                //                data.caption = text
+                //                durationLog[0].caption = text
                 targetIndex = index
-//                print(index)
+                //                print(index)
             }
         }
         
@@ -124,6 +206,56 @@ class StopWatchManeger:ObservableObject{
         log.append(LogData(data:Date(), phase:LogDataPhase.start))
     }
     
+    private func appendDurationLog()
+    {
+        let calender = Calendar(identifier: .gregorian)
+        let lastLog = log[log.count - 1]
+        if lastLog.phase == LogDataPhase.start
+        {
+            let lastDate = lastLog.data
+            let elapsedTime = calender.dateComponents([.second], from: lastDate, to: Date()).second!
+            let dLog = DurationData(data: Double(elapsedTime), start: lastDate, end:Date())
+            durationLog.append(dLog)
+        }
+    }
+    
+    private func appendDurationLog(start:Date, end:Date)
+    {
+        let calender = Calendar(identifier: .gregorian)
+        let elapsedTime = calender.dateComponents([.second], from: start, to: end).second!
+//        self.durationLog.forEach{ item in
+////            if Calendar.current.isDate(item.start, equalTo: start, toGranularity: .nanosecond)
+////            {
+////                if Calendar.current.isDate(item.end, equalTo: end, toGranularity: .nanosecond)
+////                {
+////                    print("SKIP")
+////                    return
+////                }
+////            }
+//            if item.start.time == start.time && item.end.time == end.time
+//            {
+//
+//            }
+//        }
+        var skip = false
+        
+        for item in self.durationLog
+        {
+            if item.start.time == start.time && item.end.time == end.time
+            {
+                skip = true
+                break
+            }
+        }
+        
+        if !skip
+        {
+            let dLog = DurationData(data: Double(elapsedTime), start: start, end:end)
+            durationLog.append(dLog)
+        }
+        
+    }
+    
     func stop(){
         if let _ = timer
         {
@@ -133,16 +265,7 @@ class StopWatchManeger:ObservableObject{
         secondsElapsed = 0
         mode = .stop
         
-        
-        let calender = Calendar(identifier: .gregorian)
-        let lastLog = log[log.count - 1]
-        if lastLog.phase == LogDataPhase.start
-        {
-            let lastDate = lastLog.data
-            let elapsedTime = calender.dateComponents([.second], from: lastDate, to: Date()).second!
-            let dLog = DurationData(data: Double(elapsedTime))
-            durationLog.append(dLog)
-        }
+        appendDurationLog()
         
         log.append(LogData(data:Date(), phase:LogDataPhase.finish))
     }
@@ -151,16 +274,8 @@ class StopWatchManeger:ObservableObject{
     
     
     func lap(){
-
-        let calender = Calendar(identifier: .gregorian)
-        let lastLog = log[log.count - 1]
-        if lastLog.phase == LogDataPhase.start
-        {
-            let lastDate = lastLog.data
-            let elapsedTime = calender.dateComponents([.second], from: lastDate, to: Date()).second!
-            let dLog = DurationData(data: Double(elapsedTime))
-            durationLog.append(dLog)
-        }
+        
+        appendDurationLog()
         
         log.append(LogData(data:Date(), phase:LogDataPhase.finish))
         
@@ -169,9 +284,57 @@ class StopWatchManeger:ObservableObject{
     
     
     
+    func upload()
+    {
+        let myHealthStore = HKHealthStore()
+        
+        self.durationLog.forEach{log in
+
+            let sleepSampleType = HKCategoryType(.sleepAnalysis)
+            let sleepCategory = log.category == SleepCategory.sonota ? HKCategoryValueSleepAnalysis.awake.rawValue : HKCategoryValueSleepAnalysis.asleepDeep.rawValue
+//            print(sleepCategory.description)
+            let deepSleepSample  = HKCategorySample(type: sleepSampleType,
+                                                    value:sleepCategory,
+                                                    start: log.start,
+                                                    end: log.end)
+            myHealthStore.save(deepSleepSample){
+                success, error in
+                if success
+                {
+                    print("Save:Success")
+                }else{
+                    print("Save:Failure")
+                }
+            }
+        }
+    }
     
-    
-    
+    func download()
+    {
+        let myHealthStore = HKHealthStore()
+        let sleepSampleType = HKObjectType.categoryType(forIdentifier: HKCategoryTypeIdentifier.sleepAnalysis)!
+        
+        let endDate = NSSortDescriptor(key: HKSampleSortIdentifierEndDate,
+                                       ascending: false)
+        let q = HKSampleQuery(sampleType: sleepSampleType,
+                              predicate: nil,
+                              limit: 0,
+                              sortDescriptors: [endDate]) {
+            (query, results, error) in
+            
+            if let samples = results
+            {
+                samples.forEach{ sample in
+                    let start = sample.startDate
+                    let end = sample.endDate
+                    DispatchQueue.main.async {
+                        self.appendDurationLog(start: start, end: end)
+                    }
+                }
+            }
+        }
+        myHealthStore.execute(q)
+    }
     
     func pause(){
         if let _ = timer
