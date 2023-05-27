@@ -131,6 +131,8 @@ class StopWatchManeger:ObservableObject{
     @Published var log:[LogData] = []
     @Published var durationLog:[DurationData] = []
     
+
+    
     let ud = UserDefaults.standard
     
     
@@ -204,6 +206,23 @@ class StopWatchManeger:ObservableObject{
             self.secondsElapsed += 0.1
         }
         log.append(LogData(data:Date(), phase:LogDataPhase.start))
+    }
+    
+    func getCurrentDuration()->Double
+    {
+        let calender = Calendar(identifier: .gregorian)
+        if log.count > 0
+        {
+            let lastLog = log[log.count - 1]
+            if lastLog.phase == LogDataPhase.start
+            {
+                let lastDate = lastLog.data
+                let elapsedTime = calender.dateComponents([.second], from: lastDate, to: Date()).second!
+                return Double(elapsedTime)
+            }
+        }
+        
+        return 0.0
     }
     
     private func appendDurationLog()

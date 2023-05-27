@@ -125,8 +125,9 @@ struct ContentView: View {
                     .padding(.top)
                 Text(formatSec(sec:self.stopWatchManeger.secondsElapsed))
                     .font(.custom("Futura", size: 54))
-                
-                
+                Text(formatSec(sec:self.stopWatchManeger.getCurrentDuration()))
+                    .font(.custom("Futura", size: 24))
+                Spacer()
                     .onChange(of:scenePhase){phase in
                         switch phase {
                         case .active:
